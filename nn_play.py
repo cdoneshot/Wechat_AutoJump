@@ -4,6 +4,7 @@
 
 import numpy as np
 import time
+import random
 import os, glob, shutil
 import cv2
 import argparse
@@ -156,7 +157,7 @@ class WechatAutoJump(object):
         distance = np.linalg.norm(player_pos - target_pos)
         press_time = distance * self.sensitivity
         press_time = int(np.rint(press_time))
-        press_h, press_w = int(0.82*self.resolution[0]), self.resolution[1]//2
+        press_h, press_w = int(0.82*self.resolution[0]) + random.gauss(0,50), self.resolution[1]//2 + random.gauss(0,50)
         if self.phone == 'Android':
             cmd = 'adb shell input swipe {} {} {} {} {}'.format(press_w, press_h, press_w, press_h, press_time)
             print(cmd)
